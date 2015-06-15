@@ -40,6 +40,12 @@ class Daftar extends CI_Controller {
 
 	}
 
+	public function test(){
+
+		print_r($this->member_model->getData('anggakes')->attributes('email'));
+		
+	}
+
 	
 	
 	

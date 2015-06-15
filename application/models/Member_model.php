@@ -3,6 +3,8 @@
 class Member_model extends CI_Model
 {
 
+	public $attributes = '';
+
 
 	public function __construct()
 	{
@@ -26,7 +28,7 @@ class Member_model extends CI_Model
 			);
 
 		$data_profile 			= $this->input->post('profile');
-		$data['kode_member'] 	= $this->generate_code($this->input->post('member[username]'));
+		$data_profile['kode_member'] 	= $this->generate_code($this->input->post('member[username]'));
 
 		$this->db->trans_start();
 		$this->db->insert('members',$data_member);
@@ -35,6 +37,19 @@ class Member_model extends CI_Model
 
 		return $this->db->trans_status();
 		
+	}
+
+	public function getData($val, $by = "username"){
+		
+		$user = $this->db->query("SELECT * FROM members WHERE $by='$val'")->row();
+		
+		$this->attributes = $user;
+		return $this;
+	}
+
+	public function attributes($property){
+
+		return (isset($this->attributes->$property)) ? $this->attributes->$property : '' ;
 	}
 
 
