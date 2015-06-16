@@ -70,10 +70,16 @@ class Auth extends CI_Controller {
 				$usernameOrEmail 	= $this->input->post('usernameOrEmail');
 				$password 			= $this->input->post('password');
 
-				$this->authlibrary->logout();
+				$this->authlibrary->login($usernameOrEmail, $password);
 				
 		}
 
+	}
+
+	public function logout(){
+
+		$this->authlibrary->logout($usernameOrEmail, $password);
+		
 	}
 	
 	
