@@ -39,8 +39,13 @@ class Member_model extends CI_Model
 		
 	}
 
+	/*
+	* mengambil data dari table members
+	* berdasarkan username, code, atau email
+	*/
+
 	public function getData($val, $by = "username"){
-		
+
 		$user = $this->db->query("SELECT * FROM members WHERE $by='$val'")->row();
 		
 		$this->attributes = $user;
@@ -61,7 +66,6 @@ class Member_model extends CI_Model
 	private function hash_password($password) {
 		
 		return password_hash($password, PASSWORD_BCRYPT);
-		
 	}
 
 	public function rules(){
