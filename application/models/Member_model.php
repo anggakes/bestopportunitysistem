@@ -3,7 +3,9 @@
 class Member_model extends CI_Model
 {
 
-	public $attributes = '';
+	public $attributes;
+	public $profile;
+
 
 
 	public function __construct()
@@ -11,6 +13,7 @@ class Member_model extends CI_Model
 
 		parent::__construct();
 		$this->load->database();
+		$this->load->model('member_model');
 	}
 
 	public function register(){
@@ -46,15 +49,62 @@ class Member_model extends CI_Model
 
 	public function getData($val, $by = "username"){
 
-		$user = $this->db->query("SELECT * FROM members WHERE $by='$val'")->row();
+		$user 		= $this->db->query("SELECT * FROM members WHERE $by='$val'")->row();
+		$profile 	= $this->db->query("SELECT * FROM profile WHERE kode_member='$user->code'")->row();
 		
-		$this->attributes = $user;
+		$this->attributes 	= $user;
+		$this->profile	 	= $profile;
+
 		return $this;
 	}
+
+	/*
+	* 
+	* Mengecek apakah user memiliki referral
+	*/
+	public function hasReferral(){
+
+		return ($this->attributes("code_referral") != NULL) ? true : false;
+	}
+
+	public function getReferral(){
+
+		$referral 		= $this->member_model->getData($this->attributes('referral_code'),'code');
+
+		return $referral;
+	}
+	
+	/*
+	* mengecek apakah user memiliki downline
+	* 
+	*/
+	public function hasDownline(){
+
+		$downline = $this->db->query("SELECT count(*) as banyak FROM members WHERE referral_code = '".$this->attributes('code')."'")->result();
+
+		return ($downline[0]->banyak > 0) ? true : false;
+	}
+
+	/*
+	* Mengembalikan object member_model sebagai referral user
+	* 1 user memiliki null atau banyak downline
+	*/
+	public function getDownline(){
+
+		$referral 		= $this->member_model->getData("aa",'code');
+
+		return $referral;
+	}
+
 
 	public function attributes($property){
 
 		return (isset($this->attributes->$property)) ? $this->attributes->$property : '' ;
+	}
+
+	public function profile($property){
+
+		return (isset($this->profile->$property)) ? $this->profile->$property : '' ;
 	}
 
 

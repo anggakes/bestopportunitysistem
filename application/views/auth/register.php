@@ -1,17 +1,19 @@
 
 
-<h3 class='col-sm-11'><strong>Member</strong> <small>Registration Form</small></h3>
+<h3 class='col-sm-8'><strong>Member</strong> <small>Registration Form</small></h3>
     
-    <?php echo validation_errors(); ?>     
+    <a href="<?= base_url() ?>auth/login" class='btn btn-link pull-right'> Sudah Punya Akun ?</a>
 
     <form role="form" action="<?= base_url() ?>auth/daftar" method="post" class="col-sm-11" id='form-registrasi'>
     <div class="form-group">
     <label for="exampleInputEmail1">Username</label>
     <input type="text" name='member[username]' class="form-control" id="" placeholder="Username..">
+    <div style='color:red'><?= form_error('member[username]') ?></div>
     </div>
     <div class="form-group">
     <label for="exampleInputEmail1">Alamat Email</label>
     <input type="email" name='member[email]' class="form-control" id="" placeholder="Email..">
+    <div style='color:red'><?= form_error('member[email]') ?></div>
     </div>
   <div class='row'>
   <div class="form-group col-sm-6">

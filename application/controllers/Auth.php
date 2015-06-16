@@ -21,11 +21,13 @@ class Auth extends CI_Controller {
         $this->load->library('session');
 	    $this->load->library('authlibrary',$this->params);
 	    $this->load->model('member_model');
+
+
 	}
 
 	public function daftar()
 	{	
-		
+
 		$this->form_validation->set_rules($this->member_model->rules());
 
 		// Form validation 
@@ -46,6 +48,7 @@ class Auth extends CI_Controller {
 
 	public function login()
 	{	
+		
 		$rules 		=  array(
 				array(
 	                'field' => 'usernameOrEmail',
@@ -80,6 +83,10 @@ class Auth extends CI_Controller {
 
 		$this->authlibrary->logout($usernameOrEmail, $password);
 		
+	}
+
+	public function not_allowed(){
+		$this->template->load('template/template_auth','auth/not_allowed');
 	}
 	
 	
