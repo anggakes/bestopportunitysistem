@@ -8,15 +8,7 @@
             </div>
             <div class="box-body" style="display: block;">
 
-        Referral : 
-        <?php 
-        $user = unserialize($_SESSION['login_user']);
-
-        echo
-              ($user->hasReferral()) ? 
-              $user->getReferral()->profile('nama') : 
-              "tidak ada";
-        ?>
+        
             </div><!-- /.box-body -->
             <div class="box-footer" style="display: block;">
               Footer

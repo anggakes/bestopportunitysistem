@@ -132,15 +132,10 @@
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
           <!-- Sidebar user panel -->
-          <div class="user-panel">
-            <div class="pull-left image">
-              <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
-            </div>
-            <div class="pull-left info">
-              <p>Alexander Pierce</p>
 
-              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-            </div>
+          <div class="user-panel" style='background:#000'>
+            <h5 style='color:#c0c0c0'>Kode Member :</h5>
+            <h2 style='text-align:center;color:#c0c0c0'><?= $user->attributes('code') ?></h2>
           </div>
           
           <!-- sidebar menu: : style can be found in sidebar.less -->
