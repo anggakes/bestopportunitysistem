@@ -54,4 +54,4 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 //routes untuk profile user
-$route['profile/(:any)'] = 'profile/index/$1';
+$route['profile/(:any)'] = 'profile/view/$1';

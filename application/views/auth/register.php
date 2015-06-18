@@ -7,27 +7,30 @@
     <form role="form" action="<?= base_url() ?>auth/daftar" method="post" class="col-sm-11" id='form-registrasi'>
     <div class="form-group">
     <label for="exampleInputEmail1">Username</label>
-    <input type="text" name='member[username]' class="form-control" id="" placeholder="Username..">
+    <input type="text" name='member[username]' value = "<?= set_value('member[username]')?>" class="form-control" id="" placeholder="Username..">
     <div style='color:red'><?= form_error('member[username]') ?></div>
     </div>
     <div class="form-group">
     <label for="exampleInputEmail1">Alamat Email</label>
-    <input type="email" name='member[email]' class="form-control" id="" placeholder="Email..">
+    <input type="email" name='member[email]' value = "<?= set_value('member[email]')?>" class="form-control" id="" placeholder="Email..">
     <div style='color:red'><?= form_error('member[email]') ?></div>
     </div>
   <div class='row'>
   <div class="form-group col-sm-6">
     <label for="exampleInputPassword1">Password</label>
     <input type="password" name='member[password]' class="form-control" id="" placeholder="Password..">
+    <div style='color:red'><?= form_error('member[password]') ?></div>
   </div>
   <div class="form-group col-sm-6">
     <label for="exampleInputPassword1">Konfirmasi Password</label>
     <input type="password" name='member[repassword]' class="form-control" id="" placeholder=" Retype Password..">
+    <div style='color:red'><?= form_error('member[repassword]') ?></div>
   </div>
 </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Kode Referal</label>
     <input type="text" name='member[referral_code]' class="form-control" id="" placeholder=" Kode Referal..">
+    <div style='color:red'><?= form_error('member[referral_code]') ?></div>
   </div>
  <hr>
 <div class="form-group">

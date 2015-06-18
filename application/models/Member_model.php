@@ -64,7 +64,7 @@ class Member_model extends CI_Model
 	*/
 	public function hasReferral(){
 
-		return ($this->attributes("code_referral") != NULL) ? true : false;
+		return ($this->attributes("referral_code") !== '') ? true : false;
 	}
 
 	public function getReferral(){
@@ -91,9 +91,32 @@ class Member_model extends CI_Model
 	*/
 	public function getDownline(){
 
-		$referral 		= $this->member_model->getData("aa",'code');
+		$downline_data = $this->db->query("SELECT code FROM members WHERE referral_code = '".$this->attributes('code')."'")->result();
 
-		return $referral;
+		$downline_obj 	= array();
+
+		foreach ($downline_data as $key => $value) {
+			$member_model = new Member_model;
+			$downline_obj[] = $member_model->getData($value->code,'code');
+		}
+
+		return $downline_obj;
+	}
+
+	/*
+	* Membuat chart downline
+	* 1 user memiliki null atau banyak downline
+	*/
+	function drawChartDownline ($listOfItems) {
+	    echo "<ul>";
+	    foreach ($listOfItems as $item) {
+	        echo "<li>" . $item->profile('nama');
+	        if ($item->hasDownline()) {
+	            $this->drawChartDownline($item->getDownline()); // here is the recursion
+	        }
+	        echo "</li>";
+	    }
+	    echo "</ul>";
 	}
 
 
@@ -124,7 +147,7 @@ class Member_model extends CI_Model
 	        array(
 	                'field' => 'member[username]',
 	                'label' => 'Username',
-	                'rules' => 'required'
+	                'rules' => 'required|is_unique[members.username]'
 	        ),
 	        array(
 	                'field' => 'member[password]',
@@ -142,12 +165,24 @@ class Member_model extends CI_Model
 	        array(
 	                'field' => 'member[referral_code]',
 	                'label' => 'Refferal Code',
-	                'rules' => 'required'
+	                'rules' => array(
+					                'required',
+					                array(
+					                        'referral_code_validation',
+					                        function($str)
+					                        {
+					                                
+					                                $cek = $this->db->query("SELECT count(*) as valid FROM members WHERE code='$str'")->row();
+					                                return ($cek->valid>0) ? true :false;
+					                        }
+					                )
+        						),
+	                'errors' => array('referral_code_validation'=>'Your Refferal Code not valid')
 	        ),
 	        array(
 	                'field' => 'member[email]',
 	                'label' => 'Email',
-	                'rules' => 'required'
+	                'rules' => 'required|is_unique[members.email]'
 	        ),
 	        array(
 	                'field' => 'profile[nama]',

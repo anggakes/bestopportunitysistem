@@ -13,7 +13,7 @@ $user = unserialize($_SESSION['login_user']);
               </div>
             </div>
             <div class="box-body" style="display: block;" id='level'>
-<?php print_r($user->hasDownline()) ?>
+<?php print_r($user->getDownline()) ?>
 
             </div><!-- /.box-body -->
             <div class="box-footer" style="display: block;">

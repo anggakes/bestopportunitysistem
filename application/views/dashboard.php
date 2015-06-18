@@ -15,7 +15,7 @@
         echo
               ($user->hasReferral()) ? 
               $user->getReferral()->profile('nama') : 
-              "tidak ada" 
+              "tidak ada";
         ?>
             </div><!-- /.box-body -->
             <div class="box-footer" style="display: block;">

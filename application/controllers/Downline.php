@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Profile extends CI_Controller {
+class Downline extends CI_Controller {
 
 	protected $params = array('model'=>'members');
 
@@ -19,16 +19,9 @@ class Profile extends CI_Controller {
 	public function index()
 	{	
 
-		echo "profile sendiri";
-		
-	}
-
-	public function view($username)
-	{	
-
 		$this->authlibrary->is_loginThenRedirect();
 			
-		$this->template->load('template/template_main','downline');
+		$this->template->load('template/template_main','member/downline');
 		
 	}
 	
